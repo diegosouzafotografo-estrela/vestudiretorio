@@ -1,0 +1,523 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="VestuDiretório - Fornecedores de Vestuário Atacadista">
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <h1 class="hero-title">Encontre fornecedores de vestuário atacadista</h1>
+      <p class="hero-subtitle">Dados enriquecidos para lojistas: MOQ, CPF/CNPJ, WhatsApp direto da fábrica.</p>
+      <div class="search-bar">
+        <input type="text" placeholder="Buscar fornecedor ou produto..." class="search-input" />
+        <button class="search-btn">Buscar</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <section class="main-content">
+    <div class="container">
+      <!-- Sidebar Filters -->
+      <aside class="filters-sidebar">
+        <h3 class="filters-title">Filtros</h3>
+        
+        <!-- Polo Filter -->
+        <div class="filter-group">
+          <h4 class="filter-label">Polo de Origem</h4>
+          <label class="filter-option">
+            <input type="checkbox" name="polo" value="bras" />
+            <span>Brás</span>
+          </label>
+          <label class="filter-option">
+            <input type="checkbox" name="polo" value="bom-retiro" />
+            <span>Bom Retiro</span>
+          </label>
+          <label class="filter-option">
+            <input type="checkbox" name="polo" value="25-de-marco" />
+            <span>25 de Março</span>
+          </label>
+        </div>
+
+        <!-- MOQ Filter -->
+        <div class="filter-group">
+          <h4 class="filter-label">Pedido Mínimo (MOQ)</h4>
+          <label class="filter-option">
+            <input type="radio" name="moq" value="10" />
+            <span>Até 10 unidades</span>
+          </label>
+          <label class="filter-option">
+            <input type="radio" name="moq" value="20" />
+            <span>Até 20 unidades</span>
+          </label>
+          <label class="filter-option">
+            <input type="radio" name="moq" value="50" />
+            <span>Até 50 unidades</span>
+          </label>
+          <label class="filter-option">
+            <input type="radio" name="moq" value="100" />
+            <span>Até 100 unidades</span>
+          </label>
+          <label class="filter-option">
+            <input type="radio" name="moq" value="any" checked />
+            <span>Qualquer</span>
+          </label>
+        </div>
+
+        <!-- CPF/CNPJ Filter -->
+        <div class="filter-group">
+          <h4 class="filter-label">Documento</h4>
+          <label class="filter-option">
+            <input type="checkbox" name="documento" value="cpf" />
+            <span>Aceita CPF</span>
+          </label>
+          <label class="filter-option">
+            <input type="checkbox" name="documento" value="cnpj" />
+            <span>Aceita CNPJ</span>
+          </label>
+        </div>
+
+        <!-- Product Type Filter -->
+        <div class="filter-group">
+          <h4 class="filter-label">Tipo de Produto</h4>
+          <label class="filter-option">
+            <input type="checkbox" name="produto" value="camisetas" />
+            <span>Camisetas</span>
+          </label>
+          <label class="filter-option">
+            <input type="checkbox" name="produto" value="calcas" />
+            <span>Calças</span>
+          </label>
+          <label class="filter-option">
+            <input type="checkbox" name="produto" value="vestidos" />
+            <span>Vestidos</span>
+          </label>
+          <label class="filter-option">
+            <input type="checkbox" name="produto" value="acessorios" />
+            <span>Acessórios</span>
+          </label>
+        </div>
+
+        <!-- Price Range Filter -->
+        <div class="filter-group">
+          <h4 class="filter-label">Faixa de Preço</h4>
+          <label class="filter-option">
+            <input type="checkbox" name="preco" value="$" />
+            <span>$ (Econômico)</span>
+          </label>
+          <label class="filter-option">
+            <input type="checkbox" name="preco" value="$$" />
+            <span>$$ (Intermediário)</span>
+          </label>
+          <label class="filter-option">
+            <input type="checkbox" name="preco" value="$$$" />
+            <span>$$$ (Premium)</span>
+          </label>
+        </div>
+
+        <button class="apply-filters-btn">Aplicar Filtros</button>
+      </aside>
+
+      <!-- Supplier Cards -->
+      <div class="suppliers-grid">
+        <!-- Supplier Card 1 -->
+        <article class="supplier-card">
+          <div class="supplier-header">
+            <div class="supplier-avatar" style="background-color: var(--orange);">
+              <span>CS</span>
+            </div>
+            <div class="supplier-info">
+              <h3 class="supplier-name">Confecções São Paulo</h3>
+              <p class="supplier-location">📍 Brás, São Paulo</p>
+            </div>
+          </div>
+          <div class="supplier-details">
+            <div class="detail-item">
+              <span class="detail-icon">📦</span>
+              <span class="detail-text">MOQ: 20 unidades</span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-icon">💳</span>
+              <span class="detail-text">Aceita: CPF e CNPJ</span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-icon">💰</span>
+              <span class="detail-text">Preço: $$</span>
+            </div>
+          </div>
+          <div class="supplier-products">
+            <span class="product-tag">Camisetas</span>
+            <span class="product-tag">Blusas</span>
+            <span class="product-tag">Vestidos</span>
+          </div>
+          <div class="supplier-actions">
+            <a href="https://wa.me/5511999999999" target="_blank" class="btn btn-whatsapp">
+              💬 WhatsApp
+            </a>
+            <a href="/fornecedores/confeccoes-sao-paulo" class="btn btn-secondary">
+              Ver Mais
+            </a>
+          </div>
+        </article>
+
+        <!-- Supplier Card 2 -->
+        <article class="supplier-card premium">
+          <div class="premium-badge">⭐ Premium</div>
+          <div class="supplier-header">
+            <div class="supplier-avatar" style="background-color: var(--navy);">
+              <span>RA</span>
+            </div>
+            <div class="supplier-info">
+              <h3 class="supplier-name">Roupas & Acessórios</h3>
+              <p class="supplier-location">📍 Bom Retiro, São Paulo</p>
+            </div>
+          </div>
+          <div class="supplier-details">
+            <div class="detail-item">
+              <span class="detail-icon">📦</span>
+              <span class="detail-text">MOQ: 10 unidades</span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-icon">💳</span>
+              <span class="detail-text">Aceita: CPF</span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-icon">💰</span>
+              <span class="detail-text">Preço: $</span>
+            </div>
+          </div>
+          <div class="supplier-products">
+            <span class="product-tag">Calças</span>
+            <span class="product-tag">Bermudas</span>
+            <span class="product-tag">Acessórios</span>
+          </div>
+          <div class="supplier-actions">
+            <a href="https://wa.me/5511888888888" target="_blank" class="btn btn-whatsapp">
+              💬 WhatsApp
+            </a>
+            <a href="/fornecedores/roupas-acessorios" class="btn btn-secondary">
+              Ver Mais
+            </a>
+          </div>
+        </article>
+
+        <!-- Supplier Card 3 -->
+        <article class="supplier-card">
+          <div class="supplier-header">
+            <div class="supplier-avatar" style="background-color: var(--green);">
+              <span>MF</span>
+            </div>
+            <div class="supplier-info">
+              <h3 class="supplier-name">Moda Feminina Express</h3>
+              <p class="supplier-location">📍 25 de Março, São Paulo</p>
+            </div>
+          </div>
+          <div class="supplier-details">
+            <div class="detail-item">
+              <span class="detail-icon">📦</span>
+              <span class="detail-text">MOQ: 5 unidades</span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-icon">💳</span>
+              <span class="detail-text">Aceita: CPF e CNPJ</span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-icon">💰</span>
+              <span class="detail-text">Preço: $$</span>
+            </div>
+          </div>
+          <div class="supplier-products">
+            <span class="product-tag">Vestidos</span>
+            <span class="product-tag">Saias</span>
+            <span class="product-tag">Blusas</span>
+          </div>
+          <div class="supplier-actions">
+            <a href="https://wa.me/5511777777777" target="_blank" class="btn btn-whatsapp">
+              💬 WhatsApp
+            </a>
+            <a href="/fornecedores/moda-feminina-express" class="btn btn-secondary">
+              Ver Mais
+            </a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .hero {
+    background: linear-gradient(135deg, var(--navy) 0%, #2d4a7a 100%);
+    color: var(--white);
+    padding: 80px 0;
+    text-align: center;
+  }
+
+  .hero-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 16px;
+  }
+
+  .hero-subtitle {
+    font-size: 1.25rem;
+    opacity: 0.9;
+    margin-bottom: 32px;
+  }
+
+  .search-bar {
+    display: flex;
+    max-width: 600px;
+    margin: 0 auto;
+    gap: 8px;
+  }
+
+  .search-input {
+    flex: 1;
+    padding: 16px 20px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 8px;
+    outline: none;
+  }
+
+  .search-btn {
+    padding: 16px 32px;
+    font-size: 1rem;
+    font-weight: 600;
+    background: var(--orange);
+    color: var(--white);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .search-btn:hover {
+    background: #e55a2b;
+  }
+
+  .main-content {
+    padding: 48px 0;
+  }
+
+  .main-content .container {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 32px;
+  }
+
+  .filters-sidebar {
+    background: var(--gray-50);
+    padding: 24px;
+    border-radius: 12px;
+    border: 1px solid var(--gray-200);
+    height: fit-content;
+    position: sticky;
+    top: 100px;
+  }
+
+  .filters-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 24px;
+  }
+
+  .filter-group {
+    margin-bottom: 24px;
+  }
+
+  .filter-label {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--gray-600);
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .filter-option {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+    cursor: pointer;
+  }
+
+  .filter-option input {
+    width: 16px;
+    height: 16px;
+    accent-color: var(--orange);
+  }
+
+  .apply-filters-btn {
+    width: 100%;
+    padding: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    background: var(--orange);
+    color: var(--white);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .apply-filters-btn:hover {
+    background: #e55a2b;
+  }
+
+  .suppliers-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 24px;
+  }
+
+  .supplier-card {
+    background: var(--white);
+    border: 1px solid var(--gray-200);
+    border-radius: 12px;
+    padding: 24px;
+    transition: box-shadow 0.2s, transform 0.2s;
+    position: relative;
+  }
+
+  .supplier-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+  }
+
+  .supplier-card.premium {
+    border-color: var(--orange);
+    border-width: 2px;
+  }
+
+  .premium-badge {
+    position: absolute;
+    top: -12px;
+    right: 16px;
+    background: var(--orange);
+    color: var(--white);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+
+  .supplier-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+
+  .supplier-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+    font-weight: 600;
+    font-size: 1rem;
+  }
+
+  .supplier-name {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 4px;
+  }
+
+  .supplier-location {
+    font-size: 0.875rem;
+    color: var(--gray-500);
+  }
+
+  .supplier-details {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 16px;
+    padding: 16px;
+    background: var(--gray-50);
+    border-radius: 8px;
+  }
+
+  .detail-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.875rem;
+  }
+
+  .detail-icon {
+    font-size: 1rem;
+  }
+
+  .supplier-products {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+
+  .product-tag {
+    background: var(--gray-100);
+    color: var(--gray-600);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 500;
+  }
+
+  .supplier-actions {
+    display: flex;
+    gap: 12px;
+  }
+
+  .btn {
+    flex: 1;
+    padding: 12px 16px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    border-radius: 8px;
+    text-decoration: none;
+    text-align: center;
+    transition: all 0.2s;
+  }
+
+  .btn-whatsapp {
+    background: #25D366;
+    color: var(--white);
+  }
+
+  .btn-whatsapp:hover {
+    background: #128C7E;
+  }
+
+  .btn-secondary {
+    background: var(--gray-100);
+    color: var(--gray-700);
+  }
+
+  .btn-secondary:hover {
+    background: var(--gray-200);
+  }
+
+  @media (max-width: 768px) {
+    .main-content .container {
+      grid-template-columns: 1fr;
+    }
+
+    .filters-sidebar {
+      position: static;
+    }
+
+    .suppliers-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
