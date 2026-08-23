@@ -2,522 +2,358 @@
 import Layout from '../layouts/Layout.astro';
 ---
 
-<Layout title="VestuDiretório - Fornecedores de Vestuário Atacadista">
-  <!-- Hero Section -->
-  <section class="hero">
-    <div class="container">
-      <h1 class="hero-title">Encontre fornecedores de vestuário atacadista</h1>
-      <p class="hero-subtitle">Dados enriquecidos para lojistas: MOQ, CPF/CNPJ, WhatsApp direto da fábrica.</p>
-      <div class="search-bar">
-        <input type="text" placeholder="Buscar fornecedor ou produto..." class="search-input" />
-        <button class="search-btn">Buscar</button>
+<Layout title="VestuDiretório — Fornecedores de vestuário atacadista">
+  <section class="hero-new">
+    <div class="container hero-new__grid">
+      <div class="hero-new__copy">
+        <p class="kicker"><span class="kicker__dot"></span> Guia de fornecedores de moda</p>
+        <h1>Fornecedores para abastecer sua <em>loja.</em></h1>
+        <p class="hero-new__lede">Encontre atacadistas do Brás, Bom Retiro e 25 de Março. Compare as condições e converse diretamente com quem vende.</p>
+        <div class="hero-new__notes"><span>Fornecedores selecionados</span><span>Informação objetiva</span><span>Contato direto</span></div>
+      </div>
+      <div class="search-card">
+        <div class="search-card__top"><span>Pesquisar fornecedores</span><span>Guia Vestu</span></div>
+        <label class="sr-only" for="searchInput">Buscar fornecedor ou produto</label>
+        <div class="search-card__field">
+          <input id="searchInput" type="search" placeholder="Fornecedor, produto ou polo" autocomplete="off" />
+          <button id="searchBtn" aria-label="Buscar"><span>Buscar</span><strong>↗</strong></button>
+        </div>
+        <div class="search-card__suggestions" aria-label="Sugestões de busca">
+          <button class="hero__pill" data-filter="bras">Brás</button>
+          <button class="hero__pill" data-filter="bom-retiro">Bom Retiro</button>
+          <button class="hero__pill" data-filter="25-de-marco">25 de Março</button>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Main Content -->
-  <section class="main-content">
+  <section id="directory" class="directory">
     <div class="container">
-      <!-- Sidebar Filters -->
-      <aside class="filters-sidebar">
-        <h3 class="filters-title">Filtros</h3>
-        
-        <!-- Polo Filter -->
-        <div class="filter-group">
-          <h4 class="filter-label">Polo de Origem</h4>
-          <label class="filter-option">
-            <input type="checkbox" name="polo" value="bras" />
-            <span>Brás</span>
-          </label>
-          <label class="filter-option">
-            <input type="checkbox" name="polo" value="bom-retiro" />
-            <span>Bom Retiro</span>
-          </label>
-          <label class="filter-option">
-            <input type="checkbox" name="polo" value="25-de-marco" />
-            <span>25 de Março</span>
-          </label>
-        </div>
-
-        <!-- MOQ Filter -->
-        <div class="filter-group">
-          <h4 class="filter-label">Pedido Mínimo (MOQ)</h4>
-          <label class="filter-option">
-            <input type="radio" name="moq" value="10" />
-            <span>Até 10 unidades</span>
-          </label>
-          <label class="filter-option">
-            <input type="radio" name="moq" value="20" />
-            <span>Até 20 unidades</span>
-          </label>
-          <label class="filter-option">
-            <input type="radio" name="moq" value="50" />
-            <span>Até 50 unidades</span>
-          </label>
-          <label class="filter-option">
-            <input type="radio" name="moq" value="100" />
-            <span>Até 100 unidades</span>
-          </label>
-          <label class="filter-option">
-            <input type="radio" name="moq" value="any" checked />
-            <span>Qualquer</span>
-          </label>
-        </div>
-
-        <!-- CPF/CNPJ Filter -->
-        <div class="filter-group">
-          <h4 class="filter-label">Documento</h4>
-          <label class="filter-option">
-            <input type="checkbox" name="documento" value="cpf" />
-            <span>Aceita CPF</span>
-          </label>
-          <label class="filter-option">
-            <input type="checkbox" name="documento" value="cnpj" />
-            <span>Aceita CNPJ</span>
-          </label>
-        </div>
-
-        <!-- Product Type Filter -->
-        <div class="filter-group">
-          <h4 class="filter-label">Tipo de Produto</h4>
-          <label class="filter-option">
-            <input type="checkbox" name="produto" value="camisetas" />
-            <span>Camisetas</span>
-          </label>
-          <label class="filter-option">
-            <input type="checkbox" name="produto" value="calcas" />
-            <span>Calças</span>
-          </label>
-          <label class="filter-option">
-            <input type="checkbox" name="produto" value="vestidos" />
-            <span>Vestidos</span>
-          </label>
-          <label class="filter-option">
-            <input type="checkbox" name="produto" value="acessorios" />
-            <span>Acessórios</span>
-          </label>
-        </div>
-
-        <!-- Price Range Filter -->
-        <div class="filter-group">
-          <h4 class="filter-label">Faixa de Preço</h4>
-          <label class="filter-option">
-            <input type="checkbox" name="preco" value="$" />
-            <span>$ (Econômico)</span>
-          </label>
-          <label class="filter-option">
-            <input type="checkbox" name="preco" value="$$" />
-            <span>$$ (Intermediário)</span>
-          </label>
-          <label class="filter-option">
-            <input type="checkbox" name="preco" value="$$$" />
-            <span>$$$ (Premium)</span>
-          </label>
-        </div>
-
-        <button class="apply-filters-btn">Aplicar Filtros</button>
-      </aside>
-
-      <!-- Supplier Cards -->
-      <div class="suppliers-grid">
-        <!-- Supplier Card 1 -->
-        <article class="supplier-card">
-          <div class="supplier-header">
-            <div class="supplier-avatar" style="background-color: var(--orange);">
-              <span>CS</span>
-            </div>
-            <div class="supplier-info">
-              <h3 class="supplier-name">Confecções São Paulo</h3>
-              <p class="supplier-location">📍 Brás, São Paulo</p>
-            </div>
-          </div>
-          <div class="supplier-details">
-            <div class="detail-item">
-              <span class="detail-icon">📦</span>
-              <span class="detail-text">MOQ: 20 unidades</span>
-            </div>
-            <div class="detail-item">
-              <span class="detail-icon">💳</span>
-              <span class="detail-text">Aceita: CPF e CNPJ</span>
-            </div>
-            <div class="detail-item">
-              <span class="detail-icon">💰</span>
-              <span class="detail-text">Preço: $$</span>
-            </div>
-          </div>
-          <div class="supplier-products">
-            <span class="product-tag">Camisetas</span>
-            <span class="product-tag">Blusas</span>
-            <span class="product-tag">Vestidos</span>
-          </div>
-          <div class="supplier-actions">
-            <a href="https://wa.me/5511999999999" target="_blank" class="btn btn-whatsapp">
-              💬 WhatsApp
-            </a>
-            <a href="/fornecedores/confeccoes-sao-paulo" class="btn btn-secondary">
-              Ver Mais
-            </a>
-          </div>
-        </article>
-
-        <!-- Supplier Card 2 -->
-        <article class="supplier-card premium">
-          <div class="premium-badge">⭐ Premium</div>
-          <div class="supplier-header">
-            <div class="supplier-avatar" style="background-color: var(--navy);">
-              <span>RA</span>
-            </div>
-            <div class="supplier-info">
-              <h3 class="supplier-name">Roupas & Acessórios</h3>
-              <p class="supplier-location">📍 Bom Retiro, São Paulo</p>
-            </div>
-          </div>
-          <div class="supplier-details">
-            <div class="detail-item">
-              <span class="detail-icon">📦</span>
-              <span class="detail-text">MOQ: 10 unidades</span>
-            </div>
-            <div class="detail-item">
-              <span class="detail-icon">💳</span>
-              <span class="detail-text">Aceita: CPF</span>
-            </div>
-            <div class="detail-item">
-              <span class="detail-icon">💰</span>
-              <span class="detail-text">Preço: $</span>
-            </div>
-          </div>
-          <div class="supplier-products">
-            <span class="product-tag">Calças</span>
-            <span class="product-tag">Bermudas</span>
-            <span class="product-tag">Acessórios</span>
-          </div>
-          <div class="supplier-actions">
-            <a href="https://wa.me/5511888888888" target="_blank" class="btn btn-whatsapp">
-              💬 WhatsApp
-            </a>
-            <a href="/fornecedores/roupas-acessorios" class="btn btn-secondary">
-              Ver Mais
-            </a>
-          </div>
-        </article>
-
-        <!-- Supplier Card 3 -->
-        <article class="supplier-card">
-          <div class="supplier-header">
-            <div class="supplier-avatar" style="background-color: var(--green);">
-              <span>MF</span>
-            </div>
-            <div class="supplier-info">
-              <h3 class="supplier-name">Moda Feminina Express</h3>
-              <p class="supplier-location">📍 25 de Março, São Paulo</p>
-            </div>
-          </div>
-          <div class="supplier-details">
-            <div class="detail-item">
-              <span class="detail-icon">📦</span>
-              <span class="detail-text">MOQ: 5 unidades</span>
-            </div>
-            <div class="detail-item">
-              <span class="detail-icon">💳</span>
-              <span class="detail-text">Aceita: CPF e CNPJ</span>
-            </div>
-            <div class="detail-item">
-              <span class="detail-icon">💰</span>
-              <span class="detail-text">Preço: $$</span>
-            </div>
-          </div>
-          <div class="supplier-products">
-            <span class="product-tag">Vestidos</span>
-            <span class="product-tag">Saias</span>
-            <span class="product-tag">Blusas</span>
-          </div>
-          <div class="supplier-actions">
-            <a href="https://wa.me/5511777777777" target="_blank" class="btn btn-whatsapp">
-              💬 WhatsApp
-            </a>
-            <a href="/fornecedores/moda-feminina-express" class="btn btn-secondary">
-              Ver Mais
-            </a>
-          </div>
-        </article>
+      <div class="directory__intro">
+      <div><p class="section-label">Diretório de moda</p><h2>Escolha onde comprar.</h2></div>
+        <p class="directory__description">Veja quem atende sua loja, qual é o pedido mínimo e como entrar em contato. Simples, como deve ser.</p>
+      </div>
+      <button id="mobileFilterToggle" class="mobile-filter-toggle" type="button" aria-expanded="false" aria-controls="filtersSidebar">Filtros <span>abrir ↗</span></button>
+      <div class="directory__layout">
+        <aside id="filtersSidebar" class="filters" aria-label="Filtros de busca">
+          <div class="filters__head"><span class="section-label">Refinar busca</span><button id="clearFilters" type="button">Limpar</button></div>
+          <fieldset><legend>Polo</legend>
+            <label><input type="checkbox" name="polo" value="bras" /><span>Brás</span></label>
+            <label><input type="checkbox" name="polo" value="bom-retiro" /><span>Bom Retiro</span></label>
+            <label><input type="checkbox" name="polo" value="25-de-marco" /><span>25 de Março</span></label>
+          </fieldset>
+          <fieldset><legend>Pedido mínimo</legend>
+            <label><input type="radio" name="moq" value="10" /><span>Até 10 unidades</span></label>
+            <label><input type="radio" name="moq" value="20" /><span>Até 20 unidades</span></label>
+            <label><input type="radio" name="moq" value="50" /><span>Até 50 unidades</span></label>
+            <label><input type="radio" name="moq" value="any" checked /><span>Qualquer quantidade</span></label>
+          </fieldset>
+          <fieldset><legend>Compra</legend><label><input type="checkbox" name="documento" value="cpf" /><span>Aceita CPF</span></label></fieldset>
+          <button id="applyFilters" class="filters__apply" type="button">Aplicar filtros <span>↗</span></button>
+        </aside>
+        <section class="results" aria-live="polite">
+          <div class="results__head"><p id="resultsCount">Carregando fornecedores...</p><span>Ordenados por relevância</span></div>
+          <div id="suppliersGrid" class="supplier-list"><div class="loading"><span></span>Carregando fornecedores...</div></div>
+          <div id="noResults" class="no-results" hidden><strong>Nenhum resultado ainda.</strong><span>Tente retirar um filtro ou buscar outro termo.</span><button id="clearAllFilters" class="text-button" type="button">Limpar filtros</button></div>
+        </section>
       </div>
     </div>
   </section>
 </Layout>
 
+<script>
+  const SUPABASE_URL = 'https://lktzdyzuymfbayvufdeo.supabase.co';
+  const SUPABASE_KEY = 'sb_publishable_sm6jVlKgDdG5yfiaoYFQoA_veAPnF-h';
+  let fornecedores: any[] = [];
+  async function registrarEvento(fornecedorId: string | null, evento: 'view' | 'whatsapp_click' | 'filter_apply' | 'search', metadata: Record<string, unknown> = {}) {
+    try {
+      await fetch(`${SUPABASE_URL}/rest/v1/analytics`, { method: 'POST', headers: { apikey: SUPABASE_KEY, Authorization: `Bearer ${SUPABASE_KEY}`, 'Content-Type': 'application/json', Prefer: 'return=minimal' }, body: JSON.stringify({ fornecedor_id: fornecedorId, evento, metadata }) });
+    } catch { /* tracking não pode interromper a jornada */ }
+  }
+  async function fetchFornecedores() {
+    try {
+      const response = await fetch(`${SUPABASE_URL}/rest/v1/fornecedores?select=*&order=premium.desc,nome.asc`, { headers: { apikey: SUPABASE_KEY, Authorization: `Bearer ${SUPABASE_KEY}` } });
+      if (!response.ok) throw new Error('Falha ao carregar');
+      fornecedores = await response.json(); renderizarFornecedores(fornecedores);
+    } catch (error) { const grid = document.getElementById('suppliersGrid'); if (grid) grid.innerHTML = '<p class="error-msg">Não foi possível carregar os fornecedores agora.</p>'; }
+  }
+  function getFiltros() { return { polo: Array.from(document.querySelectorAll('input[name="polo"]:checked')).map((el) => (el as HTMLInputElement).value), moq: (document.querySelector('input[name="moq"]:checked') as HTMLInputElement)?.value, cpf: Boolean(document.querySelector('input[name="documento"]:checked')), busca: ((document.getElementById('searchInput') as HTMLInputElement)?.value || '').toLowerCase() }; }
+  function aplicarFiltros() {
+    const { polo, moq, cpf, busca } = getFiltros();
+    const filtrados = fornecedores.filter((f) => { if (polo.length && !polo.includes(f.polo)) return false; if (moq && moq !== 'any' && f.moq > Number(moq)) return false; if (cpf && !f.aceita_cpf) return false; if (busca && !`${f.nome} ${f.descricao} ${f.polo} ${(f.produtos || []).join(' ')}`.toLowerCase().includes(busca)) return false; return true; });
+    renderizarFornecedores(filtrados);
+    if (polo.length || (moq && moq !== 'any') || cpf) registrarEvento(null, 'filter_apply', { polo, moq, cpf, resultados: filtrados.length });
+    if (busca) registrarEvento(null, 'search', { termo: busca, resultados: filtrados.length });
+  }
+  function labelPolo(polo: string) { return polo === 'bras' ? 'Brás' : polo === 'bom-retiro' ? 'Bom Retiro' : '25 de Março'; }
+  function labelMoq(f: any) { return f.moq_texto || (f.moq ? `${f.moq} un.` : 'Sob consulta'); }
+  function labelCompra(f: any) { return f.aceita_cpf === true ? 'CPF + CNPJ' : f.aceita_cpf === false ? 'CNPJ' : 'Consultar'; }
+  function renderizarFornecedores(lista: any[]) {
+    const grid = document.getElementById('suppliersGrid'); const empty = document.getElementById('noResults'); const count = document.getElementById('resultsCount');
+    if (!grid || !count || !empty) return; count.textContent = `${lista.length} fornecedor${lista.length === 1 ? '' : 'es'}`;
+    if (!lista.length) { grid.innerHTML = ''; empty.hidden = false; return; } empty.hidden = true;
+    grid.innerHTML = lista.map((f) => `<article class="supplier-row ${f.premium ? 'supplier-row--featured' : ''}><div class="supplier-row__identity"><div class="supplier-row__avatar">${f.nome.substring(0, 1).toUpperCase()}</div><div><div class="supplier-row__name">${f.nome}</div><div class="supplier-row__place">${labelPolo(f.polo)} <span>·</span> São Paulo</div></div></div><div class="supplier-row__facts"><span><b>MOQ</b>${labelMoq(f)}</span><span><b>Compra</b>${labelCompra(f)}</span><span><b>Produtos</b>${(f.produtos || []).slice(0, 2).join(', ')}</span></div><div class="supplier-row__action">${f.premium ? '<span class="featured-label">Destaque</span>' : ''}<a class="profile-link" href="/fornecedor?id=${encodeURIComponent(f.id)}">Ver perfil <span>↗</span></a><a class="whatsapp-link" data-fornecedor-id="${f.id}" href="https://wa.me/${String(f.whatsapp).replace(/\D/g, '')}?text=Ol%C3%A1!%20Vim%20pelo%20VestuDiret%C3%B3rio" target="_blank" rel="noopener noreferrer">WhatsApp <span>↗</span></a></div></article>`).join('');
+    lista.forEach((f) => { const key = `vestu-view-${f.id}`; if (!sessionStorage.getItem(key)) { sessionStorage.setItem(key, '1'); registrarEvento(f.id, 'view', { source: 'directory', polo: f.polo, premium: Boolean(f.premium) }); } });
+  }
+  function limparFiltros() { document.querySelectorAll('input[type="checkbox"]').forEach((el) => (el as HTMLInputElement).checked = false); (document.querySelector('input[name="moq"][value="any"]') as HTMLInputElement).checked = true; (document.getElementById('searchInput') as HTMLInputElement).value = ''; aplicarFiltros(); }
+  document.querySelectorAll('.hero__pill').forEach((pill) => pill.addEventListener('click', () => { const value = (pill as HTMLElement).dataset.filter; const checkbox = document.querySelector(`input[name="polo"][value="${value}"]`) as HTMLInputElement; if (checkbox) { checkbox.checked = !checkbox.checked; aplicarFiltros(); document.getElementById('directory')?.scrollIntoView({ behavior: 'smooth' }); } }));
+  document.getElementById('suppliersGrid')?.addEventListener('click', (event) => { const target = (event.target as HTMLElement).closest('.whatsapp-link') as HTMLElement | null; if (target?.dataset.fornecedorId) registrarEvento(target.dataset.fornecedorId, 'whatsapp_click', { source: 'directory' }); });
+  document.getElementById('searchBtn')?.addEventListener('click', aplicarFiltros); document.getElementById('searchInput')?.addEventListener('keydown', (event) => { if ((event as KeyboardEvent).key === 'Enter') aplicarFiltros(); }); document.getElementById('applyFilters')?.addEventListener('click', aplicarFiltros); document.getElementById('clearFilters')?.addEventListener('click', limparFiltros); document.getElementById('clearAllFilters')?.addEventListener('click', limparFiltros);
+  document.getElementById('mobileFilterToggle')?.addEventListener('click', () => { const toggle = document.getElementById('mobileFilterToggle'); const filters = document.getElementById('filtersSidebar'); const open = filters?.classList.toggle('filters--open'); toggle?.setAttribute('aria-expanded', String(open)); });
+  fetchFornecedores();
+</script>
+
 <style>
-  .hero {
-    background: linear-gradient(135deg, var(--navy) 0%, #2d4a7a 100%);
-    color: var(--white);
-    padding: 80px 0;
-    text-align: center;
-  }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+  .hero-new { color: var(--surface); background: var(--ink); overflow: hidden; }
+  .hero-new__grid { min-height: 570px; display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(360px, .9fr); align-items: center; gap: clamp(40px, 8vw, 120px); padding-top: 64px; padding-bottom: 72px; }
+  .kicker, .section-label { margin: 0; color: var(--coral); font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+  .kicker { display: inline-flex; align-items: center; gap: 9px; color: var(--lime); }
+  .kicker__dot { width: 8px; height: 8px; background: var(--coral); border-radius: 50%; }
+  .hero-new h1 { max-width: 720px; margin: 26px 0 24px; font-family: var(--font-display); font-size: clamp(3.4rem, 7vw, 7rem); font-weight: 700; letter-spacing: -.075em; line-height: .9; }
+  .hero-new h1 em { color: var(--coral); font-style: normal; }
+  .hero-new__lede { max-width: 470px; margin: 0; color: var(--hero-muted); font-size: 17px; line-height: 1.6; }
+  .hero-new__notes { display: flex; gap: 18px; margin-top: 40px; color: var(--muted); font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+  .search-card { padding: 28px; color: var(--ink); background: var(--lime); border-radius: var(--r-lg); box-shadow: 18px 18px 0 var(--coral); transform: rotate(1.5deg); }
+  .search-card__top { display: flex; justify-content: space-between; margin-bottom: 22px; font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+  .search-card__top span:last-child { opacity: .55; }
+  .search-card__field { display: flex; padding: 6px; background: var(--surface); border-radius: 12px; }
+  .search-card input { min-width: 0; flex: 1; padding: 14px 12px; color: var(--ink); background: transparent; border: 0; outline: 0; }
+  .search-card input::placeholder { color: var(--input-muted); }
+  .search-card__field button { display: inline-flex; align-items: center; gap: 16px; padding: 0 18px; color: var(--surface); background: var(--ink); border: 0; border-radius: 9px; font-size: 13px; font-weight: 700; }
+  .search-card__field button strong { color: var(--lime); font-size: 18px; }
+  .search-card__suggestions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 22px; }
+  .hero__pill { padding: 8px 12px; color: var(--ink); background: transparent; border: 1px solid var(--ink-faint); border-radius: 999px; font-size: 12px; font-weight: 700; }
+  .hero__pill:hover, .hero__pill.active { color: var(--surface); background: var(--ink); border-color: var(--ink); }
+  .directory { padding: clamp(60px, 8vw, 112px) 0 20px; }
+  .directory__intro { display: flex; align-items: end; justify-content: space-between; gap: 40px; margin-bottom: 55px; }
+  .directory h2 { margin: 13px 0 0; font-family: var(--font-display); font-size: clamp(2.4rem, 5vw, 4.6rem); letter-spacing: -.07em; line-height: .95; }
+  .directory__description { max-width: 350px; margin: 0; color: var(--muted); font-size: 14px; }
+  .directory__layout { display: grid; grid-template-columns: 215px minmax(0, 1fr); gap: clamp(32px, 7vw, 100px); }
+  .filters__head, .results__head { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; }
+  .filters__head { padding-bottom: 20px; border-bottom: 1px solid var(--line); }
+  .filters__head button { padding: 0; color: var(--muted); background: transparent; border: 0; font-size: 12px; text-decoration: underline; }
+  fieldset { margin: 0; padding: 23px 0; border: 0; border-bottom: 1px solid var(--line); }
+  legend { margin-bottom: 10px; color: var(--ink); font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; }
+  fieldset label { display: flex; align-items: center; gap: 10px; min-height: 33px; color: var(--muted); font-size: 13px; cursor: pointer; }
+  fieldset input { width: 15px; height: 15px; accent-color: var(--coral); }
+  .filters__apply { display: flex; justify-content: space-between; width: 100%; margin-top: 22px; padding: 13px 14px; color: var(--surface); background: var(--ink); border: 0; border-radius: 10px; font-size: 13px; font-weight: 700; }
+  .filters__apply span { color: var(--lime); font-size: 17px; }
+  .results__head { padding-bottom: 17px; border-bottom: 1px solid var(--ink); }
+  .results__head p { margin: 0; font-size: 13px; font-weight: 700; }
+  .results__head span { color: var(--muted); font-size: 12px; }
+  .supplier-list { display: grid; }
+  .supplier-row { display: grid; grid-template-columns: minmax(190px, 1.15fr) minmax(280px, 1.5fr) auto; align-items: center; gap: 22px; min-height: 132px; padding: 24px 0; border-bottom: 1px solid var(--line); transition: padding .2s, background .2s; }
+  .supplier-row:hover { padding-right: 14px; padding-left: 14px; background: var(--surface); }
+  .supplier-row--featured { border-left: 3px solid var(--coral); padding-left: 14px; }
+  .supplier-row__identity { display: flex; align-items: center; gap: 13px; }
+  .supplier-row__avatar { display: grid; place-items: center; width: 44px; height: 44px; color: var(--lime); background: var(--ink); border-radius: 12px; font-family: var(--font-display); font-size: 20px; }
+  .supplier-row__name { font-weight: 700; letter-spacing: -.02em; }
+  .supplier-row__place { margin-top: 4px; color: var(--muted); font-size: 12px; }
+  .supplier-row__place span { color: var(--coral); }
+  .supplier-row__facts { display: flex; gap: 25px; }
+  .supplier-row__facts span { display: flex; flex-direction: column; gap: 4px; color: var(--ink-soft); font-size: 13px; }
+  .supplier-row__facts b { color: var(--muted); font-size: 10px; letter-spacing: .1em; text-transform: uppercase; }
+  .supplier-row__action { display: flex; align-items: center; justify-content: end; gap: 14px; }
+  .featured-label { color: var(--gold); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; }
+  .whatsapp-link { display: inline-flex; align-items: center; gap: 8px; padding: 10px 13px; color: var(--surface); background: var(--whatsapp); border-radius: 999px; font-size: 12px; font-weight: 700; white-space: nowrap; }
+  .whatsapp-link:hover { background: color-mix(in srgb, var(--whatsapp) 86%, var(--ink)); }
+  .whatsapp-link span { color: var(--lime); font-size: 16px; }
+  .loading, .error-msg { display: flex; align-items: center; gap: 10px; padding: 42px 0; color: var(--muted); font-size: 13px; }
+  .loading span { width: 9px; height: 9px; background: var(--coral); border-radius: 50%; animation: pulse 1s infinite alternate; }
+  @keyframes pulse { to { opacity: .25; transform: scale(.6); } }
+  .no-results { display: flex; flex-direction: column; gap: 6px; padding: 42px 0; color: var(--muted); font-size: 14px; }
+  .no-results strong { color: var(--ink); font-size: 20px; }
+  .text-button { align-self: flex-start; margin-top: 10px; padding: 0; color: var(--coral-dark); background: none; border: 0; font-size: 13px; font-weight: 700; text-decoration: underline; }
+  .mobile-filter-toggle { display: none; }
+  @media (max-width: 860px) { .hero-new__grid { grid-template-columns: 1fr; min-height: auto; padding-top: 60px; padding-bottom: 80px; } .search-card { max-width: 560px; width: 100%; transform: none; } .directory__layout { gap: 35px; } .supplier-row { grid-template-columns: 1fr 1fr; } .supplier-row__action { justify-content: start; grid-column: 2; } }
+  @media (max-width: 650px) { .hero-new h1 { font-size: clamp(3.2rem, 16vw, 5rem); } .hero-new__notes { gap: 10px; flex-wrap: wrap; font-size: 9px; } .search-card { padding: 20px; } .search-card__field { flex-direction: column; gap: 6px; } .search-card__field button { min-height: 46px; justify-content: space-between; } .directory { padding-top: 56px; } .directory__intro { display: block; margin-bottom: 28px; } .directory__description { margin-top: 18px; } .mobile-filter-toggle { display: flex; justify-content: space-between; width: 100%; margin-bottom: 14px; padding: 14px 0; color: var(--ink); background: transparent; border: 0; border-top: 1px solid var(--ink); border-bottom: 1px solid var(--line); font-weight: 700; text-align: left; } .mobile-filter-toggle span { color: var(--coral-dark); font-size: 12px; } .directory__layout { display: block; } .filters { display: none; margin-bottom: 30px; padding-bottom: 22px; border-bottom: 1px solid var(--ink); } .filters--open { display: block; } .supplier-row, .supplier-row:hover, .supplier-row--featured { display: block; min-height: 0; padding: 22px 0; border-left: 0; } .supplier-row__facts { gap: 12px; margin: 20px 0; justify-content: space-between; } .supplier-row__facts span { font-size: 12px; } .supplier-row__action { justify-content: space-between; } .featured-label { order: 2; } .whatsapp-link { order: 1; } .results__head span { display: none; } }
+</style>
 
-  .hero-title {
-    font-size: 2.5rem;
-    font-weight: 700;
-    margin-bottom: 16px;
-  }
-
-  .hero-subtitle {
-    font-size: 1.25rem;
-    opacity: 0.9;
-    margin-bottom: 32px;
-  }
-
-  .search-bar {
-    display: flex;
-    max-width: 600px;
-    margin: 0 auto;
-    gap: 8px;
-  }
-
-  .search-input {
-    flex: 1;
-    padding: 16px 20px;
-    font-size: 1rem;
-    border: none;
-    border-radius: 8px;
-    outline: none;
-  }
-
-  .search-btn {
-    padding: 16px 32px;
-    font-size: 1rem;
-    font-weight: 600;
-    background: var(--orange);
-    color: var(--white);
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background 0.2s;
-  }
-
-  .search-btn:hover {
-    background: #e55a2b;
-  }
-
-  .main-content {
-    padding: 48px 0;
-  }
-
-  .main-content .container {
-    display: grid;
-    grid-template-columns: 280px 1fr;
-    gap: 32px;
-  }
-
-  .filters-sidebar {
-    background: var(--gray-50);
-    padding: 24px;
-    border-radius: 12px;
-    border: 1px solid var(--gray-200);
-    height: fit-content;
-    position: sticky;
-    top: 100px;
-  }
-
-  .filters-title {
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: var(--navy);
-    margin-bottom: 24px;
-  }
-
-  .filter-group {
-    margin-bottom: 24px;
-  }
-
-  .filter-label {
-    font-size: 0.875rem;
-    font-weight: 600;
-    color: var(--gray-600);
-    margin-bottom: 12px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-  }
-
-  .filter-option {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 8px;
-    cursor: pointer;
-  }
-
-  .filter-option input {
-    width: 16px;
-    height: 16px;
-    accent-color: var(--orange);
-  }
-
-  .apply-filters-btn {
-    width: 100%;
-    padding: 12px;
-    font-size: 1rem;
-    font-weight: 600;
-    background: var(--orange);
-    color: var(--white);
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background 0.2s;
-  }
-
-  .apply-filters-btn:hover {
-    background: #e55a2b;
-  }
-
-  .suppliers-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-    gap: 24px;
-  }
-
-  .supplier-card {
-    background: var(--white);
-    border: 1px solid var(--gray-200);
-    border-radius: 12px;
-    padding: 24px;
-    transition: box-shadow 0.2s, transform 0.2s;
-    position: relative;
-  }
-
-  .supplier-card:hover {
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    transform: translateY(-2px);
-  }
-
-  .supplier-card.premium {
-    border-color: var(--orange);
-    border-width: 2px;
-  }
-
-  .premium-badge {
-    position: absolute;
-    top: -12px;
-    right: 16px;
-    background: var(--orange);
-    color: var(--white);
-    padding: 4px 12px;
-    border-radius: 20px;
-    font-size: 0.75rem;
-    font-weight: 600;
-  }
-
-  .supplier-header {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    margin-bottom: 16px;
-  }
-
-  .supplier-avatar {
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--white);
-    font-weight: 600;
-    font-size: 1rem;
-  }
-
-  .supplier-name {
-    font-size: 1.125rem;
-    font-weight: 600;
-    color: var(--navy);
-    margin-bottom: 4px;
-  }
-
-  .supplier-location {
-    font-size: 0.875rem;
-    color: var(--gray-500);
-  }
-
-  .supplier-details {
+<style>
+  /* Último ajuste de cascata: fichas de diretório em todos os breakpoints. */
+  .supplier-list { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; align-items: stretch; }
+  .supplier-row,
+  .supplier-row:hover,
+  .supplier-row--featured {
     display: flex;
     flex-direction: column;
-    gap: 8px;
-    margin-bottom: 16px;
-    padding: 16px;
-    background: var(--gray-50);
-    border-radius: 8px;
+    align-items: stretch;
+    gap: 0;
+    min-height: 100%;
+    padding: 22px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-top: 3px solid var(--coral);
+    border-radius: 4px;
   }
+  .supplier-row:hover { padding: 22px; transform: translateY(-2px); box-shadow: var(--shadow-card); }
+  .supplier-row--featured { border-left: 1px solid var(--line); }
+  .supplier-row__identity { margin-bottom: 22px; }
+  .supplier-row__facts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin: 0 0 22px; padding: 16px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .supplier-row__facts span { min-width: 0; }
+  .supplier-row__action { justify-content: space-between; margin-top: auto; }
+  .whatsapp-link { flex: 1; justify-content: center; }
+  .featured-label { margin-right: auto; }
+  @media (max-width: 900px) { .supplier-list { grid-template-columns: 1fr; } }
+  @media (max-width: 650px) {
+    .supplier-list { grid-template-columns: 1fr; gap: 12px; }
+    .supplier-row,
+    .supplier-row:hover,
+    .supplier-row--featured { display: flex; min-height: 0; padding: 18px; border: 1px solid var(--line); border-top: 3px solid var(--coral); border-left: 1px solid var(--line); }
+    .supplier-row:hover { padding: 18px; }
+    .supplier-row__facts { gap: 8px; }
+    .supplier-row__facts span { font-size: 12px; }
+  }
+</style>
 
-  .detail-item {
+<style>
+  /* Diretório em fichas: leitura rápida para comparar fornecedores. */
+  .supplier-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: stretch;
+    gap: 18px;
+  }
+  .supplier-row,
+  .supplier-row:hover,
+  .supplier-row--featured {
     display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 0.875rem;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    min-height: 100%;
+    padding: 22px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-top: 3px solid var(--coral);
+    border-radius: 4px;
+    transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
   }
-
-  .detail-icon {
-    font-size: 1rem;
+  .supplier-row:hover {
+    padding: 22px;
+    background: var(--surface);
+    border-color: var(--border-hover);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-card);
   }
+  .supplier-row--featured { border-left: 1px solid var(--line); }
+  .supplier-row__identity { margin-bottom: 22px; }
+  .supplier-row__name { font-size: 21px; }
+  .supplier-row__facts {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+    margin: 0 0 22px;
+    padding: 16px 0;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+  .supplier-row__facts span { min-width: 0; }
+  .supplier-row__action {
+    justify-content: space-between;
+    margin-top: auto;
+  }
+  .whatsapp-link { flex: 1; justify-content: center; }
+  .featured-label { margin-right: auto; }
+  @media (max-width: 900px) {
+    .supplier-list { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 650px) {
+    .supplier-list { grid-template-columns: 1fr; gap: 12px; }
+    .supplier-row,
+    .supplier-row:hover,
+    .supplier-row--featured {
+      display: flex;
+      min-height: 0;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-top: 3px solid var(--coral);
+      border-left: 1px solid var(--line);
+    }
+    .supplier-row:hover { padding: 18px; }
+    .supplier-row__facts { gap: 8px; }
+    .supplier-row__facts span { font-size: 12px; }
+  }
+</style>
 
-  .supplier-products {
+<style>
+  /* Direção conservadora: guia comercial, não interface de tecnologia. */
+  .hero-new { background: var(--coral); }
+  .hero-new__grid { min-height: 500px; grid-template-columns: minmax(0, 1fr) minmax(360px, .82fr); gap: clamp(48px, 9vw, 130px); padding-top: 70px; padding-bottom: 70px; }
+  .kicker, .section-label { color: var(--lime); font-family: var(--font-body); letter-spacing: .12em; }
+  .kicker__dot { background: var(--lime); }
+  .hero-new h1 { max-width: 650px; margin: 22px 0 22px; font-family: var(--font-display); font-size: clamp(3.4rem, 6.4vw, 6.2rem); letter-spacing: -.055em; line-height: .95; }
+  .hero-new h1 em { color: var(--lime); }
+  .hero-new__lede { max-width: 495px; color: var(--on-coral); font-size: 18px; }
+  .hero-new__notes { gap: 24px; color: var(--coral-muted); font-size: 12px; letter-spacing: .03em; text-transform: none; }
+  .search-card { padding: 30px; background: var(--paper); border: 1px solid var(--ink-faint); border-radius: var(--r-sm); box-shadow: 12px 12px 0 var(--ink); transform: none; }
+  .search-card__top { color: var(--coral); letter-spacing: .08em; }
+  .search-card__top span:last-child { color: var(--muted); }
+  .search-card__field { border: 1px solid var(--line); border-radius: 3px; box-shadow: none; }
+  .search-card input { font-size: 16px; }
+  .search-card__field button { background: var(--coral); border-radius: 2px; }
+  .search-card__field button strong { color: var(--lime); }
+  .hero__pill { color: var(--coral); border-color: var(--line); border-radius: 3px; }
+  .hero__pill:hover, .hero__pill.active { color: var(--surface); background: var(--coral); border-color: var(--coral); }
+  .directory { padding-top: clamp(60px, 8vw, 100px); }
+  .directory h2 { font-family: var(--font-display); font-size: clamp(2.6rem, 5vw, 4.7rem); letter-spacing: -.05em; }
+  .section-label { color: var(--coral); }
+  .filters__head { border-bottom-color: var(--line); }
+  .filters__head button { color: var(--coral); }
+  fieldset { border-bottom-color: var(--line); }
+  legend { font-family: var(--font-display); font-size: 17px; font-weight: 700; letter-spacing: 0; text-transform: none; }
+  fieldset label { color: var(--ink-soft); font-size: 15px; }
+  fieldset input { accent-color: var(--coral); }
+  .filters__apply { background: var(--coral); border-radius: 3px; }
+  .filters__apply span { color: var(--lime); }
+  .results__head { border-bottom-color: var(--ink); }
+  .supplier-row { min-height: 120px; border-bottom-color: var(--line); }
+  .supplier-row:hover { background: var(--surface-muted); }
+  .supplier-row--featured { border-left-color: var(--coral); }
+  .supplier-row__avatar { color: var(--surface); background: var(--coral); border-radius: 2px; font-family: var(--font-display); }
+  .supplier-row__name { font-family: var(--font-display); font-size: 20px; }
+  .supplier-row__place span { color: var(--coral); }
+  .supplier-row__facts b { color: var(--coral); }
+  .featured-label { color: var(--gold); }
+  .whatsapp-link { background: var(--whatsapp); border-radius: 3px; }
+  .whatsapp-link span { color: var(--lime); }
+  .site-footer { background: var(--ink); }
+  @media (max-width: 650px) { .hero-new__grid { padding-top: 55px; padding-bottom: 60px; } .hero-new h1 { font-size: clamp(3.1rem, 15vw, 4.8rem); } .search-card { box-shadow: 7px 7px 0 var(--ink); } }
+</style>
+
+<style>
+  /* Cascata final: fichas de diretório também no mobile. */
+  .supplier-list { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; align-items: stretch; }
+  .supplier-row,
+  .supplier-row:hover,
+  .supplier-row--featured {
     display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-bottom: 16px;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    min-height: 100%;
+    padding: 22px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-top: 3px solid var(--coral);
+    border-radius: 4px;
   }
-
-  .product-tag {
-    background: var(--gray-100);
-    color: var(--gray-600);
-    padding: 4px 12px;
-    border-radius: 20px;
-    font-size: 0.75rem;
-    font-weight: 500;
-  }
-
-  .supplier-actions {
-    display: flex;
-    gap: 12px;
-  }
-
-  .btn {
-    flex: 1;
-    padding: 12px 16px;
-    font-size: 0.875rem;
-    font-weight: 600;
-    border-radius: 8px;
-    text-decoration: none;
-    text-align: center;
-    transition: all 0.2s;
-  }
-
-  .btn-whatsapp {
-    background: #25D366;
-    color: var(--white);
-  }
-
-  .btn-whatsapp:hover {
-    background: #128C7E;
-  }
-
-  .btn-secondary {
-    background: var(--gray-100);
-    color: var(--gray-700);
-  }
-
-  .btn-secondary:hover {
-    background: var(--gray-200);
-  }
-
-  @media (max-width: 768px) {
-    .main-content .container {
-      grid-template-columns: 1fr;
-    }
-
-    .filters-sidebar {
-      position: static;
-    }
-
-    .suppliers-grid {
-      grid-template-columns: 1fr;
-    }
+  .supplier-row:hover { padding: 22px; transform: translateY(-2px); box-shadow: var(--shadow-card); }
+  .supplier-row--featured { border-left: 1px solid var(--line); }
+  .supplier-row__identity { margin-bottom: 22px; }
+  .supplier-row__facts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin: 0 0 22px; padding: 16px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .supplier-row__facts span { min-width: 0; }
+  .supplier-row__action { justify-content: space-between; margin-top: auto; }
+  .whatsapp-link { flex: 1; justify-content: center; }
+  .featured-label { margin-right: auto; }
+  @media (max-width: 900px) { .supplier-list { grid-template-columns: 1fr; } }
+  @media (max-width: 650px) {
+    .supplier-list { grid-template-columns: 1fr; gap: 12px; }
+    .supplier-row,
+    .supplier-row:hover,
+    .supplier-row--featured { display: flex; min-height: 0; padding: 18px; border: 1px solid var(--line); border-top: 3px solid var(--coral); border-left: 1px solid var(--line); }
+    .supplier-row:hover { padding: 18px; }
+    .supplier-row__facts { gap: 8px; }
+    .supplier-row__facts span { font-size: 12px; }
   }
 </style>

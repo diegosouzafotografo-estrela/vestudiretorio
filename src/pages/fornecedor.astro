@@ -1,0 +1,78 @@
+---
+import Layout from '../../src/layouts/Layout.astro';
+---
+
+<Layout title="Fornecedor — VestuDiretório">
+  <main class="profile-page">
+    <div class="container">
+      <a class="back-link" href="/#directory">← Voltar ao diretório</a>
+      <div id="profileState" class="profile-state">Carregando perfil...</div>
+      <article id="profile" class="profile-card" hidden>
+        <div class="profile-card__top"><span id="profileBadge" class="profile-badge">Fornecedor selecionado</span><span id="profilePlace"></span></div>
+        <div class="profile-card__heading"><div id="profileAvatar" class="profile-avatar"></div><div><p class="section-label">Perfil do fornecedor</p><h1 id="profileName"></h1></div></div>
+        <p id="profileDescription" class="profile-description"></p>
+        <div class="profile-facts"><div><b>Pedido mínimo</b><span id="profileMoq"></span></div><div><b>Compra</b><span id="profilePurchase"></span></div><div><b>Produtos</b><span id="profileProducts"></span></div></div>
+        <div class="profile-card__actions"><a id="profileWhatsapp" class="profile-whatsapp" target="_blank" rel="noopener noreferrer">Conversar pelo WhatsApp <span>↗</span></a><a id="profileInstagram" class="profile-instagram" target="_blank" rel="noopener noreferrer" hidden>Instagram <span>↗</span></a></div>
+      </article>
+    </div>
+  </main>
+</Layout>
+
+<script>
+  const SUPABASE_URL = 'https://lktzdyzuymfbayvufdeo.supabase.co';
+  const SUPABASE_KEY = 'sb_publishable_sm6jVlKgDdG5yfiaoYFQoA_veAPnF-h';
+  const id = new URLSearchParams(window.location.search).get('id');
+  const polo = (value: string) => value === 'bras' ? 'Brás' : value === 'bom-retiro' ? 'Bom Retiro' : '25 de Março';
+  const state = document.getElementById('profileState');
+  const card = document.getElementById('profile');
+  async function registrarEvento(evento: 'view' | 'whatsapp_click', metadata: Record<string, unknown> = {}) {
+    try { await fetch(`${SUPABASE_URL}/rest/v1/analytics`, { method: 'POST', headers: { apikey: SUPABASE_KEY, Authorization: `Bearer ${SUPABASE_KEY}`, 'Content-Type': 'application/json', Prefer: 'return=minimal' }, body: JSON.stringify({ fornecedor_id: id, evento, metadata }) }); } catch { /* tracking não pode interromper a jornada */ }
+  }
+  async function loadProfile() {
+    if (!id) { if (state) state.textContent = 'Fornecedor não encontrado.'; return; }
+    const response = await fetch(`${SUPABASE_URL}/rest/v1/fornecedores?id=eq.${encodeURIComponent(id)}&select=*`, { headers: { apikey: SUPABASE_KEY, Authorization: `Bearer ${SUPABASE_KEY}` } });
+    const rows = response.ok ? await response.json() : [];
+    const f = rows[0];
+    if (!f) { if (state) state.textContent = 'Fornecedor não encontrado.'; return; }
+    document.title = `${f.nome} — VestuDiretório`;
+    (document.getElementById('profileName') as HTMLElement).textContent = f.nome;
+    (document.getElementById('profileAvatar') as HTMLElement).textContent = f.nome.substring(0, 1).toUpperCase();
+    (document.getElementById('profilePlace') as HTMLElement).textContent = `${polo(f.polo)} · São Paulo`;
+    (document.getElementById('profileDescription') as HTMLElement).textContent = f.descricao || 'Entre em contato para conhecer o catálogo e as condições de compra.';
+    (document.getElementById('profileMoq') as HTMLElement).textContent = f.moq_texto || (f.moq ? `${f.moq} unidades` : 'Sob consulta');
+    (document.getElementById('profilePurchase') as HTMLElement).textContent = f.aceita_cpf === true ? 'CPF + CNPJ' : f.aceita_cpf === false ? 'CNPJ' : 'Consultar';
+    (document.getElementById('profileProducts') as HTMLElement).textContent = (f.produtos || []).join(', ') || 'Moda';
+    const whatsapp = String(f.whatsapp || '').replace(/\D/g, '');
+    (document.getElementById('profileWhatsapp') as HTMLAnchorElement).href = `https://wa.me/${whatsapp}?text=Ol%C3%A1!%20Vim%20pelo%20VestuDiret%C3%B3rio`;
+    if (f.instagram) { const link = document.getElementById('profileInstagram') as HTMLAnchorElement; link.hidden = false; link.href = f.instagram.startsWith('http') ? f.instagram : `https://instagram.com/${f.instagram.replace('@', '')}`; }
+    if (f.premium) (document.getElementById('profileBadge') as HTMLElement).textContent = 'Fornecedor em destaque';
+    registrarEvento('view', { source: 'profile', polo: f.polo, premium: Boolean(f.premium) });
+    document.getElementById('profileWhatsapp')?.addEventListener('click', () => registrarEvento('whatsapp_click', { source: 'profile', polo: f.polo, premium: Boolean(f.premium) }));
+    if (state) state.hidden = true; if (card) card.hidden = false;
+  }
+  loadProfile().catch(() => { if (state) state.textContent = 'Não foi possível carregar este perfil agora.'; });
+</script>
+
+<style>
+  /* O perfil usa os mesmos tokens da home e da landing comercial. */
+  .profile-page { min-height: calc(100vh - 70px); padding: 56px 0 100px; background: var(--paper); }
+  .back-link { color: var(--coral-dark); font-size: 14px; font-weight: 700; }
+  .profile-state { padding: 80px 0; color: var(--muted); }
+  .profile-card { max-width: 850px; margin: 44px auto 0; padding: clamp(26px, 5vw, 60px); background: var(--surface); border: 1px solid var(--line); border-top: 3px solid var(--coral); border-radius: 4px; }
+  .profile-card__top, .profile-card__heading, .profile-card__actions { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+  .profile-card__top { color: var(--muted); font-size: 13px; }
+  .profile-badge { color: var(--coral); font-weight: 700; text-transform: uppercase; letter-spacing: .1em; font-size: 11px; }
+  .profile-card__heading { justify-content: start; margin: 58px 0 24px; }
+  .profile-avatar { display: grid; place-items: center; width: 66px; height: 66px; color: var(--surface); background: var(--coral); font: 700 30px var(--font-display); }
+  .profile-card h1 { margin: 8px 0 0; font: 700 clamp(2.5rem, 6vw, 5.4rem)/.9 var(--font-display); letter-spacing: -.06em; }
+  .profile-description { max-width: 650px; color: var(--ink-soft); font-size: 18px; line-height: 1.6; }
+  .profile-facts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 42px 0; }
+  .profile-facts div { display: flex; flex-direction: column; gap: 7px; padding: 16px; background: var(--paper); border: 1px solid var(--line); border-top: 3px solid var(--coral); border-radius: var(--r-sm); }
+  .profile-facts b { color: var(--coral); font-size: 10px; letter-spacing: .1em; text-transform: uppercase; }
+  .profile-facts span { color: var(--ink); font-size: 15px; }
+  .profile-whatsapp, .profile-instagram { display: inline-flex; align-items: center; gap: 10px; padding: 14px 18px; font-weight: 700; }
+  .profile-whatsapp { color: var(--surface); background: var(--whatsapp); border-radius: 3px; }
+  .profile-whatsapp span, .profile-instagram span { color: var(--lime); }
+  .profile-instagram { color: var(--coral-dark); border: 1px solid var(--line); border-radius: 3px; }
+  @media (max-width: 600px) { .profile-page { padding-top: 34px; } .profile-card { margin-top: 30px; } .profile-card__heading { margin-top: 42px; } .profile-facts { grid-template-columns: 1fr; gap: 16px; } .profile-card__actions { align-items: stretch; flex-direction: column; } .profile-whatsapp, .profile-instagram { justify-content: center; } }
+</style>

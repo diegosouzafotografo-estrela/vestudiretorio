@@ -1,0 +1,17 @@
+# Local Netlify folder
+.netlify
+.vercel
+
+# Build and generated files
+dist/
+.astro/
+node_modules/
+
+# Local configuration
+.env
+.env.*
+!.env.example
+
+# Logs and system files
+*.log
+.DS_Store
