@@ -1,0 +1,56 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Para fornecedores — VestuDiretório" description="Apresente sua empresa a lojistas que procuram fornecedores de moda no atacado.">
+  <section class="supplier-hero">
+    <div class="container supplier-hero__inner">
+      <p class="section-label">Para quem vende no atacado</p>
+      <h1>Mais clareza para o lojista encontrar sua empresa.</h1>
+      <p class="supplier-hero__lede">O VestuDiretório organiza informações de fornecedores de moda para tornar a primeira conversa mais simples, objetiva e confiável.</p>
+      <a class="supplier-hero__cta" href="mailto:contato@elofirme.com.br?subject=Quero%20cadastrar%20meu%20fornecedor">Quero apresentar minha empresa <span>↗</span></a>
+    </div>
+  </section>
+
+  <section class="supplier-section">
+    <div class="container">
+      <div class="supplier-heading"><p class="section-label">O que você ganha</p><h2>Uma apresentação que ajuda o comprador a decidir.</h2></div>
+      <div class="supplier-benefits">
+        <article><span>01</span><h3>Informação organizada</h3><p>Mostre polo, produtos, pedido mínimo e condições de compra em um perfil fácil de consultar.</p></article>
+        <article><span>02</span><h3>Contato direto</h3><p>O lojista encontra o canal de WhatsApp ou Instagram informado por sua empresa, sem intermediário.</p></article>
+        <article><span>03</span><h3>Presença com critério</h3><p>O cadastro segue uma política de dados e evidências. Destaques comerciais serão sempre identificados.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="supplier-proof">
+    <div class="container supplier-proof__grid">
+      <div><p class="section-label">Como funciona</p><h2>Primeiro entendemos. Depois apresentamos.</h2></div>
+      <ol><li><strong>Envie seus dados</strong><span>Nome, polo, produtos e canais de atendimento.</span></li><li><strong>Revisamos o cadastro</strong><span>Conferimos as informações básicas antes de publicar.</span></li><li><strong>Você recebe o link</strong><span>Acompanhe a apresentação e os contatos gerados.</span></li></ol>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  /* A landing comercial herda explicitamente o sistema visual da home. */
+  .supplier-hero { color: var(--surface); background: var(--coral); }
+  .supplier-hero__inner { padding: clamp(74px, 11vw, 145px) 0; }
+  .supplier-hero h1 { max-width: 760px; margin: 20px 0 24px; color: var(--surface); font-family: var(--font-display); font-size: clamp(3.2rem, 7vw, 6.8rem); letter-spacing: -.08em; line-height: .9; }
+  .supplier-hero__lede { max-width: 560px; color: var(--on-coral); font-size: 18px; line-height: 1.6; }
+  .supplier-hero__cta { display: inline-flex; gap: 18px; align-items: center; margin-top: 26px; padding: 15px 18px; color: var(--ink); background: var(--lime); border: 0; border-radius: 4px; font-weight: 700; }
+  .supplier-hero__cta span { color: var(--coral-dark); font-size: 20px; }
+  .supplier-section { padding: clamp(70px, 9vw, 120px) 0; }
+  .supplier-heading { max-width: 650px; margin-bottom: 54px; }
+  .supplier-heading h2, .supplier-proof h2 { max-width: 680px; margin: 15px 0 0; font-family: var(--font-display); font-size: clamp(2.5rem, 5vw, 4.7rem); letter-spacing: -.07em; line-height: .94; }
+  .supplier-benefits { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .supplier-benefits article { padding: 28px; border: 1px solid var(--line); border-radius: 4px; background: var(--surface); }
+  .supplier-benefits span { color: var(--coral); font-size: 12px; font-weight: 700; }
+  .supplier-benefits h3 { margin: 45px 0 10px; font-family: var(--font-display); font-size: 27px; letter-spacing: -.04em; }
+  .supplier-benefits p { margin: 0; color: var(--muted); }
+  .supplier-proof { padding: clamp(70px, 9vw, 120px) 0; background: var(--paper); border-top: 1px solid var(--line); }
+  .supplier-proof__grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(40px, 9vw, 140px); }
+  .supplier-proof ol { display: grid; gap: 12px; margin: 0; padding: 0; list-style: none; }
+  .supplier-proof li { display: grid; gap: 5px; padding: 18px; background: var(--surface); border: 1px solid var(--line); border-top: 3px solid var(--coral); border-radius: var(--r-sm); }
+  .supplier-proof li span { color: var(--muted); }
+  @media (max-width: 700px) { .supplier-hero__inner, .supplier-section, .supplier-proof { padding-left: 22px; padding-right: 22px; } .supplier-benefits, .supplier-proof__grid { grid-template-columns: 1fr; } .supplier-benefits h3 { margin-top: 30px; } }
+</style>
